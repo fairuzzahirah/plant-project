@@ -20,11 +20,11 @@
             android:id="@+id/action_notLoggedIn_to_plantCareFragment"
             app:destination="@id/plantCareFragment" />
         <action
-            android:id="@+id/action_notLoggedIn_to_profileFragment2"
-            app:destination="@id/profileFragment2" />
+            android:id="@+id/action_notLoggedIn_to_profileFragment"
+            app:destination="@id/profileFragment" />
         <action
-            android:id="@+id/action_notLoggedIn_to_wishlistFragment2"
-            app:destination="@id/wishlistFragment2" />
+            android:id="@+id/action_notLoggedIn_to_wishlistFragment"
+            app:destination="@id/wishlistFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -55,18 +55,25 @@
         <action
             android:id="@+id/action_registerFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/plantCareFragment"
         android:name="com.example.plantproject.PlantCareFragment"
         android:label="PlantCareFragment" />
     <fragment
-        android:id="@+id/profileFragment2"
+        android:id="@+id/profileFragment"
         android:name="com.example.plantproject.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/wishlistFragment2"
+        android:id="@+id/wishlistFragment"
         android:name="com.example.plantproject.WishlistFragment"
         android:label="fragment_wishlist"
         tools:layout="@layout/fragment_wishlist" />
