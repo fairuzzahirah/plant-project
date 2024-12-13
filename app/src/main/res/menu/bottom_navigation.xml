@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home"/>
+    <item
+        android:id="@+id/planFragment"
+        android:icon="@drawable/baseline_edit_note_24"
+        android:title="Plant Care"/>
+<!--        android:iconTint="@color/blue"-->
+        />
+    <item
+        android:id="@+id/wishlistFragment"
+        android:icon="@drawable/baseline_star_24"
+        android:title="Wishlist"/>
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/baseline_account_circle_24"
+        android:title="Profile"/>
+</menu>

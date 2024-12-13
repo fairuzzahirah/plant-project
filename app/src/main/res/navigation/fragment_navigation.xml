@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/notLoggedIn"
+        android:name="com.example.plantproject.NotLoggedIn"
+        android:label="fragment_not_logged_in"
+        tools:layout="@layout/fragment_not_logged_in" >
+        <action
+            android:id="@+id/action_notLoggedIn_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_notLoggedIn_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_notLoggedIn_to_plantCareFragment"
+            app:destination="@id/plantCareFragment" />
+        <action
+            android:id="@+id/action_notLoggedIn_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
+        <action
+            android:id="@+id/action_notLoggedIn_to_wishlistFragment2"
+            app:destination="@id/wishlistFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.plantproject.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_notLoggedIn"
+            app:destination="@id/notLoggedIn" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.plantproject.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.plantproject.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/plantCareFragment"
+        android:name="com.example.plantproject.PlantCareFragment"
+        android:label="PlantCareFragment" />
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="com.example.plantproject.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/wishlistFragment2"
+        android:name="com.example.plantproject.WishlistFragment"
+        android:label="fragment_wishlist"
+        tools:layout="@layout/fragment_wishlist" />
+</navigation>
