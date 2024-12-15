@@ -51,7 +51,6 @@ class RegisterFragment : Fragment() {
 
                 val user = User(email, password, username)
 
-                // Call API to register user
                 RetrofitClient.instance.register(user).enqueue(object : Callback<AuthResponse> {
                     override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
 

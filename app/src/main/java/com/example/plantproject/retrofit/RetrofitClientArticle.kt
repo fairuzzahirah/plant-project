@@ -3,14 +3,14 @@ package com.example.plantproject.retrofit
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitClient {
+object RetrofitClientArticle {
     private const val BASE_URL = "https://ppbo-api.vercel.app/QXtDJ/"
 
-    val instance: ApiService by lazy {
+    val instance: ArticleApiService by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(ApiService::class.java)
+            .create(ArticleApiService::class.java)
     }
 }

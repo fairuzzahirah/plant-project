@@ -10,10 +10,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiService {
-    // Untuk Register
-    @POST("QXtDJ/user")
+    @POST("user")
     fun register(@Body user: User): Call<AuthResponse>
 
-    @GET("QXtDJ/user")
-    suspend fun getUsers(): Response<List<User>>
 }

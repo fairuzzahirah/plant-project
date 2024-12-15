@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.navigation)
+    alias(libs.plugins.kotlin.kapt)
 }
 android {
     namespace = "com.example.plantproject"
@@ -54,4 +55,9 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
+    kapt(libs.glide.compiler)
+
 }

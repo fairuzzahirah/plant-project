@@ -8,8 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.plantproject.R
-
-data class Article(val image: String, val title: String, val text: String)
+import com.example.plantproject.model.Article
 
 class ArticleAdapter(private val articles: List<Article>) :
     RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
@@ -31,7 +30,7 @@ class ArticleAdapter(private val articles: List<Article>) :
         holder.titleView.text = article.title
         holder.textView.text = article.text
         Glide.with(holder.imageView.context)
-            .load(article.image)
+            .load(article.imageUrl)
             .into(holder.imageView)
     }
 
