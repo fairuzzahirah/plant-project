@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -24,6 +25,9 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Menampilkan data username dan age dari SharedPreferences
+        showUserProfile()
 
         binding.btnLogout.setOnClickListener {
             // Hapus data pengguna dari SharedPreferences
@@ -63,6 +67,21 @@ class ProfileFragment : Fragment() {
 
         // Menampilkan pesan Toast
         Toast.makeText(activity, "Logout Successful!", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showUserProfile() {
+        val sharedPref = requireActivity().getSharedPreferences("user_pref", Context.MODE_PRIVATE)
+
+        // Ambil data username dan age dari SharedPreferences
+        val username = sharedPref.getString("user_name", "Tidak ada username")
+        val email = sharedPref.getString("user_email","Email Belum Terverifikasi")
+
+        // Menampilkan data di TextView
+        val textViewUsername: TextView = binding.usernameProfile
+        val textViewEmail: TextView = binding.emailProfile
+
+        textViewUsername.text = "Username: $username"
+        textViewEmail.text = "Email: $email"
     }
 
     override fun onDestroyView() {

@@ -7,18 +7,48 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.plantproject.R
+import com.example.plantproject.adapter.Article
+import com.example.plantproject.adapter.ArticleAdapter
 
-class HomeFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    }
 
+    class HomeFragment : Fragment() {
+
+        private lateinit var recyclerView: RecyclerView
+
+        override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? {
+            // Inflate the layout for this fragment
+            val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+            // Inisialisasi RecyclerView
+            recyclerView = view.findViewById(R.id.recyclerView)
+            recyclerView.layoutManager = LinearLayoutManager(context)
+
+            // Dummy Data
+            val articles = listOf(
+                Article(
+                    image = "https://via.placeholder.com/150",
+                    title = "Article 1",
+                    text = "This is the first article."
+                ),
+                Article(
+                    image = "https://via.placeholder.com/150",
+                    title = "Article 2",
+                    text = "This is the second article."
+                )
+            )
+
+            // Set Adapter
+            recyclerView.adapter = ArticleAdapter(articles)
+
+            return view
+        }
     override fun onStart() {
         super.onStart()
         checkLoginStatus()

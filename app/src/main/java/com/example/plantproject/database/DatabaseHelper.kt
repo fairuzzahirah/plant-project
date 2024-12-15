@@ -1,5 +1,6 @@
 package com.example.plantproject.database
 
+import android.R.attr.password
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -17,24 +18,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         const val COLUMN_USERNAME = "username"
         const val COLUMN_EMAIL = "email"
         const val COLUMN_PASSWORD = "password"
-
-        // Singleton instance
-        @Volatile
-        private var INSTANCE: DatabaseHelper? = null
-
-        // Get the singleton instance of the DatabaseHelper
-        fun getInstance(context: Context): DatabaseHelper =
-            INSTANCE ?: synchronized(this) {
-                INSTANCE ?: DatabaseHelper(context.applicationContext).also { INSTANCE = it }
-            }
-    }
-
-    // Use a database reference that will be kept open
-    private var database: SQLiteDatabase? = null
-
-    init {
-        // Open the database connection when the helper is initialized
-        database = writableDatabase
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -53,46 +36,41 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         onCreate(db)
     }
 
-    // Insert user into the database
     fun insertUser(user: User) {
-        val values = ContentValues().apply {
-            put(COLUMN_USERNAME, user.username)
-            put(COLUMN_EMAIL, user.email)
-            put(COLUMN_PASSWORD, user.password)
-        }
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(COLUMN_USERNAME, user.username)
+        values.put(COLUMN_EMAIL, user.email)
+        values.put(COLUMN_PASSWORD, user.password)
 
-        val result = database?.insert(TABLE_USERS, null, values)
-        // Optionally handle result here
+        val result = db.insert(TABLE_USERS, null, values)
+        db.close()
     }
 
-    // Check user by email and password
     fun checkUser(email: String, password: String): Boolean {
+        val db = this.readableDatabase
         val query = "SELECT * FROM $TABLE_USERS WHERE $COLUMN_EMAIL = ? AND $COLUMN_PASSWORD = ?"
-        val cursor: Cursor = database?.rawQuery(query, arrayOf(email, password)) ?: return false
+        val cursor: Cursor = db.rawQuery(query, arrayOf(email, password))
         val exists = cursor.count > 0
         cursor.close()
+        db.close()
         return exists
     }
-
-    // Get user by email
     fun getUserByEmail(email: String): User? {
-        val cursor = database?.query(
+        val db = readableDatabase
+        val cursor = db.query(
             TABLE_USERS, null,
             "$COLUMN_EMAIL = ?", arrayOf(email),
             null, null, null
         )
-        cursor?.use {
-            if (it.moveToFirst()) {
-                val username = it.getString(it.getColumnIndexOrThrow(COLUMN_USERNAME))
-                val password = it.getString(it.getColumnIndexOrThrow(COLUMN_PASSWORD))
-                return User(username, email, password)
-            }
+        if (cursor != null && cursor.moveToFirst()) {
+            val username = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_USERNAME))
+            val password = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD))
+            val user = User(username, email, password)
+            cursor.close()
+            return user
         }
+        cursor?.close()
         return null
-    }
-
-    // Close the database connection when no longer needed
-    fun closeDatabase() {
-        database?.close()
     }
 }
